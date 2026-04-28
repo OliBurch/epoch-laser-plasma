@@ -1,0 +1,33 @@
+begin:control
+  nx = 1000
+  nsteps = 1500
+  x_min = -20 * micron
+  x_max = 20 * micron
+end:control
+
+begin:boundaries
+  bc_x_min = simple_laser
+  bc_x_max = open
+end:boundaries
+
+begin:laser
+  boundary = x_min
+  intensity_w_cm2 = 1.0e18
+  lambda = 1.0 * micron
+  t_profile = gauss(time, 30*femto, 15*femto)
+end:laser
+
+begin:species
+  name = electron
+  charge = -1.0
+  mass = 1.0
+  number_density = 1.0e24
+  npart = 50 * nx
+end:species
+
+begin:output
+  dt_snapshot = 20 * femto
+  number_density = always
+  ey = always
+  ex = always
+end:output
